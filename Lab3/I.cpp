@@ -2,58 +2,52 @@
 
 using namespace std;
 
-int a,b,c, arr[20000];
-
-
-
-void binary_search(int x)
-{
-    int l = 1, r = a;
-    int s = 0, e = 0;
-    while(l <= r)
-    {
-        int mid = (l+r) / 2;
-
-        if(x == arr[mid])
-        {
-            if(e == 0) e = mid+1;
-        }
-        if(x > arr[mid]) l = mid + 1;
-        else r = mid - 1;
-    }
-    
-    l = 1, r = a;
-
-    while(l <= r)
-    {
-        int mid = (l+r) / 2;
-
-        if(x == arr[mid])
-        {
-            if(e != mid) s = mid+1;
-        }
-        if(x > arr[mid]) l = mid + 1;
-        else r = mid - 1;
-    }
-
-    cout<<s<<" "<<e<<endl;
-}
-
-
-
 int main()
 {
-    cin>>a>>b;
-
-    for(int i = 0; i < a; i++)
+    int n , b;
+    cin >> n >> b;                
+    int intArray[200000];
+    for (int i = 0; i < n; i++)
     {
-        cin>>c;
-        arr[i] = c; 
-    };
+        cin >> intArray[i];  
+    }
 
     for(int i = 0; i < b; i++)
-    {
-        cin>>c;
-        binary_search(c);
-   }
+    {   
+        int x;            
+        cin>>x;
+    
+        int m, l = 0, r = n - 1; 
+
+
+        while (l != r)
+        {
+            m = (l + r) / 2;
+            if (intArray[m] < x)
+                l = m + 1;
+            else
+                r = m;
+        }
+        if (intArray[l] == x)    
+            cout << l + 1 << " ";
+        else                     
+            cout << 0 << " ";
+
+    
+        l = 0;                   
+        r = n - 1;
+        while (l < r - 1)
+        {
+            m = (l + r) / 2;
+            if (intArray[m] <= x)
+                l = m;
+            else
+                r = m - 1;
+        }
+        if (intArray[r] == x)    
+            cout << r + 1 << endl;
+        else if (intArray[l] == x)
+            cout << l + 1 << endl;
+    }
+    return 0;
 }
